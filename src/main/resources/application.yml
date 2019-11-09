@@ -1,0 +1,25 @@
+server:
+  port: 8090 #生产和测试为同一个端口
+  servlet:
+    context-path: /cmfz
+    jsp:
+      init-parameters:
+        development: true
+spring:
+  mvc:
+    view:
+      prefix: /    #配置SpringBoot的视图解析器
+      suffix: .jsp
+  datasource:   #数据源
+    type: org.apache.commons.dbcp.BasicDataSource   #指定连接池类型
+    driver-class-name: com.mysql.jdbc.Driver        #指定驱动
+    url: jdbc:mysql://localhost:3306/cmfz          #指定url
+    username: root                                    #指定用户名
+    password: root
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 100MB
+mybatis:
+  type-aliases-package: com.baizhi.entity  #起别名
+  mapper-locations: classpath:com/baizhi/mapper/*Mapper.xml #Mapper文件的注册

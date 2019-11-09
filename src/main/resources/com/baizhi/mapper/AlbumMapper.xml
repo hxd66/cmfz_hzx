@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.baizhi.dao.AlbumDAO">
+    <select id="selectNew" resultType="album">
+        select * from (select id,title,cover,chapter_count chapterCount,score,author,broadcast,publish_date publishDate,brief,create_date createDate,guru_id guruId from cmfz_album Order By create_date asc) i limit 0,5
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
