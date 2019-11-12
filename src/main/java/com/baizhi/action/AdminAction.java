@@ -1,8 +1,12 @@
 package com.baizhi.action;
 
-import com.baizhi.entity.Admin;
 import com.baizhi.service.AdminService;
 import com.baizhi.util.CreateValidateCode;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,15 +25,29 @@ public class AdminAction {
     private AdminService adminService;
 
     @RequestMapping("/login")
-    public String login(Admin admin, HttpServletRequest request, HttpSession session, String enCode) {
+    public String login(String adminName, String password, HttpServletRequest request, HttpSession session, String enCode) {
+        String code = (String) session.getAttribute("code");
+
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(adminName, password);
         try {
-            Admin admin1 = adminService.selectOne(admin, enCode, session);
-            session.setAttribute("login", admin1);
-        } catch (Exception e) {
-            session.setAttribute("message", e.getMessage());
+            subject.login(usernamePasswordToken);
+            if (code.equals(enCode)) {
+                return "redirect:/index.jsp";
+            } else {
+                session.setAttribute("message", "验证码错误");
+                return "redirect:/login/login.jsp";
+            }
+        } catch (UnknownAccountException e) {
+            session.setAttribute("message", "用户名错误");
+            e.printStackTrace();
+            return "redirect:/login/login.jsp";
+        } catch (IncorrectCredentialsException e) {
+            session.setAttribute("message", "密码错误");
+            e.printStackTrace();
             return "redirect:/login/login.jsp";
         }
-        return "redirect:/index.jsp";
+
 
     }
 

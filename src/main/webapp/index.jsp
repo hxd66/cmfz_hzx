@@ -1,3 +1,4 @@
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@page pageEncoding="UTF-8" isELIgnored="false" contentType="text/html; utf-8" %>
 <!doctype html>
 <html lang="en">
@@ -66,10 +67,17 @@
                 <li><a href="#">欢迎</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false">${sessionScope.login.adminNickName} <span class="caret"></span></a>
+                       aria-expanded="false">
+                        <shiro:authenticated>
+                        <shiro:principal></shiro:principal> <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="${pageContext.request.contextPath}/Admin/loginout">安全退出</a></li>
                     </ul>
+                    </shiro:authenticated>
+                    <shiro:notAuthenticated>
+                        <a href="${pageContext.request.contextPath}/login/login.jsp">登录</a>
+                    </shiro:notAuthenticated>
+
                 </li>
             </ul>
         </div>
@@ -131,23 +139,26 @@
 
             </div>
         </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title"> <!--保证面板之间可以进行对应的交互-->
-                    <a class="collapsed active" data-toggle="collapse" data-parent="#accordion"
-                       href="#collapseFour">
-                        用户管理
-                    </a>
-                </h4>
+        <shiro:hasRole name="super">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title"> <!--保证面板之间可以进行对应的交互-->
+                        <a class="collapsed active" data-toggle="collapse" data-parent="#accordion"
+                           href="#collapseFour">
+                            用户管理
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseFour" class="panel-collapse collapse">
+                    <ul class="nav nav-tabs nav-pills nav-stacked" role="tablist">
+                        <li role="presentation"><a class="btn btn-default"
+                                                   href="javascript:$('#index').load('${pageContext.request.contextPath}/user.jsp')">查询用户</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <div id="collapseFour" class="panel-collapse collapse">
-                <ul class="nav nav-tabs nav-pills nav-stacked" role="tablist">
-                    <li role="presentation"><a class="btn btn-default"
-                                               href="javascript:$('#index').load('${pageContext.request.contextPath}/user.jsp')">查询用户</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        </shiro:hasRole>
+
         <div class="panel panel-default">
             <!--面板头-->
             <div class="panel-heading">

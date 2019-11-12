@@ -1,3 +1,4 @@
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@page contentType="text/html; UTF-8" isELIgnored="false" pageEncoding="UTF-8" %>
 <!doctype html>
 <html lang="en">
@@ -50,7 +51,7 @@
                     {
                         name: "caozuo",
                         formatter: function (cellvalue, options, rowObject) {
-                            return "<a onclick=\"openModal('edit','" + rowObject.id + "')\" class='btn btn-info'>修改</a>";
+                            return "<shiro:hasPermission name="article:update"><a onclick=\"openModal('edit','" + rowObject.id + "')\" class='btn btn-info'>修改</a></shiro:hasPermission>";
                         }
                     },
 

@@ -1,11 +1,12 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" isELIgnored="false" %>
+<%@page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
+<!doctype html>
+<html lang="en">
 <head>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bootstrap Login Form Template</title>
-    <!-- CSS -->
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/login/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/login/assets/font-awesome/css/font-awesome.min.css">
@@ -25,7 +26,7 @@
     <script src="${pageContext.request.contextPath}/login/assets/js/jquery.backstretch.min.js"></script>
     <script src="${pageContext.request.contextPath}/login/assets/js/scripts.js"></script>
     <script src="${pageContext.request.contextPath}/login/assets/js/jquery.validate.min.js"></script>
-    <script>
+    <script type="application/javascript">
         $(function () {
             $("#captchaImage").click(function () {
                 $("#captchaImage").attr("src", "${pageContext.request.contextPath }/Admin/code?d=" + new Date() + "");
