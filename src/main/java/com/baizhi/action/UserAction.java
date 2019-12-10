@@ -4,7 +4,9 @@ import com.baizhi.api.BaseApiService;
 import com.baizhi.entity.China;
 import com.baizhi.entity.User;
 import com.baizhi.service.UserService;
+import org.apache.activemq.command.ActiveMQQueue;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -62,5 +64,14 @@ public class UserAction extends BaseApiService {
         map.put("men", men);
         map.put("man", man);
         return map;
+    }
+
+    @Autowired
+    private JmsTemplate jmsTemplate;
+
+    @RequestMapping("/66")
+    public void sendMsg(String msg) {
+        ActiveMQQueue hzx = new ActiveMQQueue("hzx");
+        jmsTemplate.convertAndSend(hzx, msg);
     }
 }

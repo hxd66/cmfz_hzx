@@ -28,6 +28,7 @@ public class ShiroFilter {
         map.put("/**/*.jpg", "anon");
         map.put("/Admin/login", "anon");
         map.put("/Admin/code", "anon");
+        map.put("/user/66", "anon");
         map.put("/**", "authc");
         shiroFilterFactoryBean.setLoginUrl("/login/login.jsp");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);

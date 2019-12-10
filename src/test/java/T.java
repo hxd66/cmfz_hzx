@@ -24,4 +24,7 @@ public class T {
         e.printStackTrace();
 
     }*/
+   public void t() {
+
+   }
 }

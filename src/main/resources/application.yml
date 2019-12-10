@@ -20,6 +20,10 @@ spring:
     multipart:
       max-file-size: 20MB
       max-request-size: 100MB
+  activemq:
+    broker-url: tcp://192.168.100.31:61616
+    user: admin
+    password: admin
 mybatis:
   type-aliases-package: com.baizhi.entity  #起别名
   mapper-locations: classpath:com/baizhi/mapper/*Mapper.xml #Mapper文件的注册
